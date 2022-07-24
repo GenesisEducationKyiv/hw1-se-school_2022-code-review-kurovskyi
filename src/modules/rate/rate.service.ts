@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
 import { RateType } from './rate.type';
-import { RateNotFoundException } from './exceptions/rate-bad-request.exception';
+import { RateNotFoundException } from './exceptions';
 
 @Injectable()
 export class RateService {
