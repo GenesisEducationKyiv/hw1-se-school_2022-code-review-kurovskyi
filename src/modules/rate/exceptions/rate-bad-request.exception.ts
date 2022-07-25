@@ -1,6 +1,6 @@
 import { BadRequestException } from '@nestjs/common';
 
-export class RateNotFoundException extends BadRequestException {
+export class RateBadRequestException extends BadRequestException {
   constructor(error?: string) {
     super('error.rateBadRequest', error);
   }

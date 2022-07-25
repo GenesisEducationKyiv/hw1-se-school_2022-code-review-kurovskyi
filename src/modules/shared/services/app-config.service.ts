@@ -57,6 +57,12 @@ export class AppConfigService {
     };
   }
 
+  get external() {
+    return {
+      rateApiKey: this.getString('RATE_API_KEY'),
+    };
+  }
+
   private get(key: string): string {
     const value = this.configService.get<string>(key);
 
