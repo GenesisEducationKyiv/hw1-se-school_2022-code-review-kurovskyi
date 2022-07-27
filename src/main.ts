@@ -3,10 +3,12 @@ import { BadRequestException, ValidationPipe } from '@nestjs/common';
 import type { NestExpressApplication } from '@nestjs/platform-express';
 import { ExpressAdapter } from '@nestjs/platform-express';
 
+import helmet from 'helmet';
+
 import { initSwagger } from './inits';
 import { SharedModule } from './modules/shared/shared.module';
 import { AppConfigService } from './modules/shared/services';
-import { AppModule } from './app.module';
+import { AppModule } from './modules/app/app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(
@@ -25,6 +27,9 @@ async function bootstrap() {
   );
 
   const appConfig = app.select(SharedModule).get(AppConfigService);
+
+  // Additional security headers
+  app.use(helmet());
 
   if (!appConfig.isDevelopment) {
     app.enableShutdownHooks();
