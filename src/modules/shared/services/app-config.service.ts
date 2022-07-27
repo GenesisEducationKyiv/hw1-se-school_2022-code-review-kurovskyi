@@ -77,7 +77,14 @@ export class AppConfigService {
 
   get mail(): MailerOptions {
     return {
-      transport: this.getString('MAIL_TRANSPORT') ?? '',
+      transport: this.getString('MAIL_TRANSPORT') || {
+        host: this.getString('MAIL_HOST'),
+        port: this.getNumber('MAIL_PORT'),
+        auth: {
+          user: this.getString('MAIL_USER'),
+          pass: this.getString('MAIL_PASSWORD'),
+        },
+      },
       defaults: {
         from: `"${this.getString('MAIL_FROM_NAME') ?? 'No Reply'}" <${
           this.getString('MAIL_FROM') ?? 'noreply@example.com'
