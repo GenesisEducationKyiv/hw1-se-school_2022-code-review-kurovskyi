@@ -1,9 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 
-import { RateType } from './rate.type';
+import { AppConfigService } from '../shared';
+
+import { Rate } from './types';
 import { RateBadRequestException } from './exceptions';
-import { AppConfigService } from '../shared/services';
 
 @Injectable()
 export class RateService {
@@ -12,7 +13,7 @@ export class RateService {
     private readonly configService: AppConfigService,
   ) {}
 
-  async get(): Promise<RateType> {
+  async get(): Promise<Rate> {
     try {
       const rateResponse = await this.httpService.axiosRef.get(
         'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest',

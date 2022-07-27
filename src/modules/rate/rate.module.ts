@@ -8,5 +8,6 @@ import { RateService } from './rate.service';
   imports: [HttpModule],
   providers: [RateService],
   controllers: [RateController],
+  exports: [RateService],
 })
 export class RateModule {}
