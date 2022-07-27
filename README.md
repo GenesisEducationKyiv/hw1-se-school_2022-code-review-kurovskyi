@@ -1,73 +1,81 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /><a>
-</p>
+# Bitcoin API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-  
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+- 📱 **NestJS** – NodeJS фреймворк
+- 📜 **TypeScript** – JS на максималках
+- ⚙️ **.env Configuration** – Доступна гнучка конфігурація проєкту
+- 📊 **Swagger** – Доступна документація API
+- 🔐 **Helmet Security** – Додаткові безпекові заголовки
+- 🐢 **Throttler** – Захист від потоку запитів
+- ✨ **Class Validation** – Валідація вхідних даних
+- 🐳 **Docker Compose** – Проєкт може крутитися в контейнеру
 
-## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
-## Installation
+## Встановлення
 
 ```bash
-$ npm install
+# 1. Склонуйте проєкт
+https://github.com/kurovskyi/bitcoin-api.git
+
+# 2. Увійдіть до проєкту
+cd bitcoin-api
+
+# 3. Вкажіть ваші змінні середовища за шаблоном
+cp example.env .env
+cp example.env development.env
+
+# 4. Встановіть залежності
+yarn
 ```
 
-## Running the app
+## Запуск
+
+### Для локального запуску:
+
+❗️ Будуть використовуватися змінні з файлу `development.env`
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+yarn start:dev
 ```
 
-## Test
+### Docker Compose:
+
+❗️ Будуть використовуватися змінні з файлу `.env`
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+docker-compose up -d
 ```
 
-## Support
+## Використання
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+В конфігурації `*.env` вказується порт, за яким буде доступний ресурс. Адреса за замовчуванням: `http://localhost:3000`.
 
-## Stay in touch
+Для перегляду Swagger: `http://localhost:3000/docs`.
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+## Налаштування
 
-## License
+❗️ Для правильної роботи програми треба власноруч налаштувати [third-party API CoinMarketCap](https://coinmarketcap.com/api/) для роботи з курсом BTC та поштовий сервер SMTP.
 
-  Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+Усі ці параметри задаються в `.env` файлі.
+
+```bash
+# Сюди ключ від сервісу CoinMarketCap
+RATE_API_KEY=your-key
+
+Можна взяти мій – bb1f1a5e-7f4b-40d7-8903-fa8a6a1a5e1b
+```
+
+Поштові параметри задаються тут:
+
+```bash
+MAIL_HOST=mail.host.com
+MAIL_PORT=587
+MAIL_USER=mail@gmail.com
+MAIL_PASSWORD=pass
+MAIL_FROM=mail@gmail.com
+MAIL_FROM_NAME=${NAME}
+
+MAIL_TRANSPORT=
+```
+
+❗️ Якщо MAIL_TRANSPORT буде вказаний, то усі інші параметри будуть ігноруватися. Цей параметр являє собою спеціальну строку підключення.
+
+Приклад: `MAIL_TRANSPORT=smtps://mail@gmail.com:PASSWORD@mail.host.com`
