@@ -398,3 +398,6 @@ Temporary Items
 production.env
 development.env
 dist
+
+#Data
+data
