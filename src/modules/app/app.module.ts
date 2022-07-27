@@ -14,7 +14,9 @@ import { AppService } from './app.service';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: `${process.env.NODE_ENV}.env`,
+      envFilePath: `${
+        process.env.NODE_ENV === 'production' ? '' : 'development'
+      }.env`,
       expandVariables: true,
     }),
     ThrottlerModule.forRootAsync({

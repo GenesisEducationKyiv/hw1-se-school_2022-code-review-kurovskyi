@@ -9,12 +9,12 @@ import { isNil } from 'lodash';
 export class AppConfigService {
   constructor(private configService: ConfigService) {}
 
-  get isDevelopment(): boolean {
-    return this.nodeEnv === 'development';
-  }
-
   get isProduction(): boolean {
     return this.nodeEnv === 'production';
+  }
+
+  get isDevelopment(): boolean {
+    return !this.isProduction;
   }
 
   get isTest(): boolean {

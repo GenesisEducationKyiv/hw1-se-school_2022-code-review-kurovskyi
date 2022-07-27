@@ -1,0 +1,38 @@
+services:
+  app-dev:
+    build:
+      context: .
+      target: development
+      dockerfile: ./Dockerfile
+    restart: unless-stopped
+    command: yarn start:debug
+    env_file:
+      - development.env
+    ports:
+      - ${PORT}:${PORT}
+    networks:
+      - nesjs-network
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    profiles:
+      - dev
+  app-prod:
+    build:
+      context: .
+      target: production
+      dockerfile: ./Dockerfile
+    restart: unless-stopped
+    command: yarn start:prod
+    env_file:
+      - .env
+    ports:
+      - ${PORT}:${PORT}
+    networks:
+      - nesjs-network
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+
+networks:
+    nesjs-network:
