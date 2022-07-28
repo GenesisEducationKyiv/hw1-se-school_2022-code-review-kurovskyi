@@ -1,7 +1,7 @@
 {
   "name": "bitcoin-api",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Bitcoin API with the NestJS framework for the Genesis educational program.",
   "bugs": {
     "url": "https://github.com/kurovskyi/bitcoin-api/issues",
