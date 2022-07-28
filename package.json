@@ -1,8 +1,13 @@
 {
-  "name": "nest-typescript-starter",
+  "name": "bitcoin-api",
   "private": true,
   "version": "1.0.0",
-  "description": "Nest TypeScript starter repository",
+  "description": "Bitcoin API with the NestJS framework for the Genesis educational program.",
+  "bugs": {
+    "url": "https://github.com/kurovskyi/bitcoin-api/issues",
+    "email": "me@kurovskyi.dev"
+  },
+  "author": "Dmytro Kurovskyi <me@kurovskyi.dev> (https://kurovskyi.dev)",
   "license": "MIT",
   "scripts": {
     "prebuild": "rimraf dist",
