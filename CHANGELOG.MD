@@ -1,5 +1,23 @@
 # Changelog
 
+## [1.1.1](https://github.com/kurovskyi/bitcoin-api/compare/1.1.0...1.1.1) (2022-07-28)
+
+
+### 🐛 Bug Fixes
+
+* fix docker and husky conflict ([40d4fd1](https://github.com/kurovskyi/bitcoin-api/commit/40d4fd13857698c95d14342862f1d90f6204bce8))
+
+
+### 📝 Documentation
+
+* readme changes ([217b996](https://github.com/kurovskyi/bitcoin-api/commit/217b9964e3a7b5c2995013704c4463220bc9ac2c))
+* readme improvements ([41d5487](https://github.com/kurovskyi/bitcoin-api/commit/41d54870e22cb3fb53cfc76d52d4cf5861ae89af))
+
+
+### ♻️ Code Refactoring
+
+* disable npm publish by default in release-it config ([7124f62](https://github.com/kurovskyi/bitcoin-api/commit/7124f622d25c79fc4e967400fbef52f41eeba889))
+
 ## 1.1.0 (2022-07-28)
 
 
