@@ -13,7 +13,7 @@ export class RateService {
     private readonly configService: AppConfigService,
   ) {}
 
-  async get(): Promise<Rate> {
+  async getRate(): Promise<Rate> {
     try {
       const rateResponse = await this.httpService.axiosRef.get(
         'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest',

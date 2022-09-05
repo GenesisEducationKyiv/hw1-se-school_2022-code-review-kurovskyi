@@ -3,8 +3,6 @@ import { ConfigService } from '@nestjs/config';
 import type { MailerOptions } from '@nestjs-modules/mailer';
 import type { ThrottlerModuleOptions } from '@nestjs/throttler';
 
-import { isNil } from 'lodash';
-
 @Injectable()
 export class AppConfigService {
   constructor(private configService: ConfigService) {}
@@ -24,7 +22,7 @@ export class AppConfigService {
   private get(key: string): string {
     const value = this.configService.get<string>(key);
 
-    if (isNil(value)) {
+    if (!value) {
       throw new Error(key + ' environment variable does not set'); // probably we should call process.exit() too to avoid locking the service
     }
 

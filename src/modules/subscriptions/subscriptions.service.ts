@@ -56,7 +56,7 @@ export class SubscriptionsService {
   async sendEmails(): Promise<void> {
     const allSubscribers = await this.getAllSubscribers();
 
-    const rate = await this.rateService.get();
+    const rate = await this.rateService.getRate();
 
     await this.mailService.sendNewRate({ data: { rate }, to: allSubscribers });
   }

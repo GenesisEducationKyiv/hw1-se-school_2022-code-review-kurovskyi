@@ -24,6 +24,7 @@ cd bitcoin-api
 # 3. Вкажіть ваші змінні середовища за шаблоном
 cp example.env .env
 cp example.env development.env
+cp example.env test.env
 
 # 4. Встановіть залежності
 yarn

@@ -15,7 +15,7 @@ import { AppService } from './app.service';
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: `${
-        process.env.NODE_ENV === 'production' ? '' : 'development'
+        process.env.NODE_ENV === 'production' ? '' : process.env.NODE_ENV
       }.env`,
       expandVariables: true,
     }),

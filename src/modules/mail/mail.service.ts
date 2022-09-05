@@ -15,6 +15,10 @@ export class MailService {
     const devLink = 'https://kurovskyi.dev';
     const devLinkText = 'kurovskyi.dev';
 
+    if (Array.isArray(sendMailInput.to) && !sendMailInput.to.length) {
+      return;
+    }
+
     await this.mailerService.sendMail({
       to: sendMailInput.to,
       subject: title,

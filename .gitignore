@@ -397,6 +397,7 @@ Temporary Items
 .env
 production.env
 development.env
+test.env
 dist
 
 #Data

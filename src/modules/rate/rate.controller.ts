@@ -24,7 +24,7 @@ export class RateController {
   })
   @ApiBadRequestResponse({ description: 'Invalid third-party response.' })
   async getRate() {
-    const rateValue = await this.rateService.get();
+    const rateValue = await this.rateService.getRate();
 
     return rateValue;
   }
