@@ -30,9 +30,7 @@ export class SubscriptionsController {
   @ApiConflictResponse({ description: 'Email already exists.' })
   @ApiBadRequestResponse({ description: 'Invalid input params.' })
   async subscribe(@Body() subscribeDto: SubscribeDto) {
-    const rateValue = await this.subscriptionsService.subscribe(subscribeDto);
-
-    return rateValue;
+    await this.subscriptionsService.subscribe(subscribeDto);
   }
 
   @Post('/sendEmails')

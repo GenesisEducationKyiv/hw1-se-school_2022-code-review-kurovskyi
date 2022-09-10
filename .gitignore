@@ -400,5 +400,8 @@ development.env
 test.env
 dist
 
+#npm
+package-json.lock
+
 #Data
 data
