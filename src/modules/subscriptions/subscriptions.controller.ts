@@ -40,8 +40,6 @@ export class SubscriptionsController {
   })
   @ApiOkResponse({ description: 'Email distribution is successful.' })
   async sendEmails() {
-    const rateValue = await this.subscriptionsService.sendEmails();
-
-    return rateValue;
+    await this.subscriptionsService.sendEmails();
   }
 }

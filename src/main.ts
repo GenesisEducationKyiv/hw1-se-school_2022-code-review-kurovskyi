@@ -6,6 +6,7 @@ import { ExpressAdapter } from '@nestjs/platform-express';
 import helmet from 'helmet';
 
 import { initSwagger } from './inits';
+import { GlobalValidationPipe } from './common/pipes';
 import { SharedModule } from './modules/shared/shared.module';
 import { AppConfigService } from './modules/shared/services';
 import { AppModule } from './modules/app/app.module';
@@ -16,15 +17,7 @@ async function bootstrap() {
     new ExpressAdapter(),
   );
 
-  app.useGlobalPipes(
-    new ValidationPipe({
-      whitelist: true,
-      transform: true,
-      dismissDefaultMessages: true,
-      forbidUnknownValues: true,
-      exceptionFactory: (errors) => new BadRequestException(errors),
-    }),
-  );
+  app.useGlobalPipes(new GlobalValidationPipe());
 
   const appConfig = app.select(SharedModule).get(AppConfigService);
 
