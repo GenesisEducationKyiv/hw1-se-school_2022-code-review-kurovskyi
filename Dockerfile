@@ -4,11 +4,11 @@ WORKDIR /usr/src/app
 
 COPY --chown=node:node package*.json yarn.lock ./
 
-RUN npm install --only=development --ignore-scripts
+RUN yarn install --frozen-lockfile --ignore-scripts
 
 COPY --chown=node:node . .
 
-RUN npm run build
+RUN yarn build
 
 USER node
 
@@ -21,7 +21,7 @@ WORKDIR /usr/src/app
 
 COPY --chown=node:node package*.json yarn.lock ./
 
-RUN npm install --only=production --ignore-scripts
+RUN yarn install --production --ignore-scripts
 
 COPY --chown=node:node --from=development /usr/src/app/dist ./dist
 
