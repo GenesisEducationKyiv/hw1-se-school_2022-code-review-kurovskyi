@@ -69,7 +69,9 @@ export class AppConfigService {
 
   get external() {
     return {
-      rateApiKey: this.getString('RATE_API_KEY'),
+      rateApiProvider: this.getString('CRYPTO_CURRENCY_PROVIDER'),
+      coinMarketApiKey: this.getString('COIN_MARKET_API_KEY'),
+      coinRankingApiKey: this.getString('COIN_RANKING_API_KEY'),
     };
   }
 

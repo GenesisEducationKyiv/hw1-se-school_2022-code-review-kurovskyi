@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, CacheModule } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { ThrottlerModule } from '@nestjs/throttler';
 
@@ -25,6 +25,7 @@ import { AppService } from './app.service';
         return appConfig.throttler;
       },
     }),
+    CacheModule.register({ isGlobal: true, ttl: 60, max: 10 }),
     SharedModule,
     RateModule,
     SubscriptionsModule,

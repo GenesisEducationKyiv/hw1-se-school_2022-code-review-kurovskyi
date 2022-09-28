@@ -1,46 +1,36 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { HttpService } from '@nestjs/axios';
 
-import { AppConfigService } from '../../shared';
-import { RateService } from '../rate.service';
 import { RateBadRequestException } from '../exceptions';
+import {
+  type IRateApiProvider,
+  RATE_API_PROVIDER_INTERFACE_KEY,
+} from '../interfaces';
+import { RateService } from '../rate.service';
 
-const mockRate = 100;
+const mockRate = 777;
 
-class MockHttpService {
-  axiosRef = {
-    get: async () => {
-      const result = {
-        data: { data: [{ quote: { UAH: { price: mockRate } } }] },
-      };
-
-      return result;
-    },
-  };
-}
-
-class MockAppConfig {
-  external = {
-    rateApiKey: '123',
-  };
+class MockRateApiProvider implements IRateApiProvider {
+  getRate = jest.fn().mockResolvedValue(mockRate);
 }
 
 describe('RateService', () => {
   let service: RateService;
 
-  let mockHttpService: HttpService;
+  let mockRateApiProvider: IRateApiProvider;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         RateService,
-        { provide: HttpService, useClass: MockHttpService },
-        { provide: AppConfigService, useClass: MockAppConfig },
+        {
+          provide: RATE_API_PROVIDER_INTERFACE_KEY,
+          useClass: MockRateApiProvider,
+        },
       ],
     }).compile();
 
     service = module.get(RateService);
-    mockHttpService = module.get(HttpService);
+    mockRateApiProvider = module.get(RATE_API_PROVIDER_INTERFACE_KEY);
   });
 
   describe('base checks', () => {
@@ -51,34 +41,20 @@ describe('RateService', () => {
 
   describe('methods', () => {
     describe('get rate', () => {
-      const httpServiceExpectation = () => {
-        expect(mockHttpService.axiosRef.get).toHaveBeenCalledWith(
-          expect.any(String),
-          expect.objectContaining({
-            headers: {
-              'X-CMC_PRO_API_KEY': expect.any(String),
-            },
-            params: { convert: 'UAH' },
-          }),
-        );
-      };
-
       it('should get rate with working api', async () => {
-        jest.spyOn(mockHttpService.axiosRef, 'get');
-
         await expect(service.getRate()).resolves.toEqual(mockRate);
-        httpServiceExpectation();
+        expect(mockRateApiProvider.getRate).toHaveBeenCalled();
       });
 
       it('should throws an error if api fails', async () => {
-        jest.spyOn(mockHttpService.axiosRef, 'get').mockImplementation(() => {
-          throw new RateBadRequestException();
+        jest.spyOn(mockRateApiProvider, 'getRate').mockImplementation(() => {
+          throw new Error();
         });
 
         await expect(service.getRate()).rejects.toEqual(
           new RateBadRequestException(),
         );
-        httpServiceExpectation();
+        expect(mockRateApiProvider.getRate).toHaveBeenCalled();
       });
     });
   });

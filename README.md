@@ -32,16 +32,16 @@ yarn
 
 ## Налаштування
 
-❗️ Для правильної роботи програми треба власноруч налаштувати [third-party API CoinMarketCap](https://coinmarketcap.com/api/) для роботи з курсом BTC та поштовий сервер SMTP.
+❗️ Для правильної роботи програми треба власноруч налаштувати [API CoinMarketCap](https://coinmarketcap.com/api/) та [API CoinRanking](https://developers.coinranking.com/api) для роботи з курсом BTC та поштовий сервер SMTP.
 
 Усі ці параметри задаються в `*.env` файлах.
 
-Для початку треба встановити ключ API CoinMarketCap:
+Для початку треба обрати крипто провайдер і встановити ключі API CoinMarketCap та API CoinRanking (можна взяти мої):
 
 ```bash
-RATE_API_KEY=your-key
-
-# Можна взяти мій – bb1f1a5e-7f4b-40d7-8903-fa8a6a1a5e1b
+CRYPTO_CURRENCY_PROVIDER=CoinMarket # або CoinRanking
+COIN_MARKET_API_KEY=bb1f1a5e-7f4b-40d7-8903-fa8a6a1a5e1b
+COIN_RANKING_API_KEY=coinranking645f191d14a11463f154d4e86681cf1ab98aa99cd018b9be
 ```
 
 Поштові параметри задаються тут:

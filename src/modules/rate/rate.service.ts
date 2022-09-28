@@ -1,31 +1,22 @@
-import { Injectable } from '@nestjs/common';
-import { HttpService } from '@nestjs/axios';
+import { Injectable, Inject } from '@nestjs/common';
 
-import { AppConfigService } from '../shared';
-
-import { Rate } from './types';
+import type { Rate } from './types';
+import {
+  type IRateApiProvider,
+  RATE_API_PROVIDER_INTERFACE_KEY,
+} from './interfaces';
 import { RateBadRequestException } from './exceptions';
 
 @Injectable()
 export class RateService {
   constructor(
-    private readonly httpService: HttpService,
-    private readonly configService: AppConfigService,
+    @Inject(RATE_API_PROVIDER_INTERFACE_KEY)
+    private readonly rateApiProvider: IRateApiProvider,
   ) {}
 
   async getRate(): Promise<Rate> {
     try {
-      const rateResponse = await this.httpService.axiosRef.get(
-        'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest',
-        {
-          headers: {
-            'X-CMC_PRO_API_KEY': this.configService.external.rateApiKey,
-          },
-          params: { convert: 'UAH' },
-        },
-      );
-
-      const rate = rateResponse.data.data[0].quote.UAH.price;
+      const rate = await this.rateApiProvider.getRate();
 
       return rate;
     } catch (error) {
