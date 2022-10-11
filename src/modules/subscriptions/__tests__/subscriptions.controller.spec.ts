@@ -51,7 +51,9 @@ describe('SubscriptionsController', () => {
         await expect(
           controller.subscribe({ email: 'me@kurovskyi.dev' }),
         ).resolves.toBe(undefined);
-        expect(mockSubscriptionsService.subscribe).toHaveBeenCalled();
+        expect(mockSubscriptionsService.subscribe).toHaveBeenCalledWith(
+          expect.objectContaining({ email: expect.any(String) }),
+        );
       });
     });
 

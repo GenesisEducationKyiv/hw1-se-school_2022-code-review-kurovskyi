@@ -51,11 +51,23 @@ describe('RateService', () => {
 
   describe('methods', () => {
     describe('get rate', () => {
+      const httpServiceExpectation = () => {
+        expect(mockHttpService.axiosRef.get).toHaveBeenCalledWith(
+          expect.any(String),
+          expect.objectContaining({
+            headers: {
+              'X-CMC_PRO_API_KEY': expect.any(String),
+            },
+            params: { convert: 'UAH' },
+          }),
+        );
+      };
+
       it('should get rate with working api', async () => {
         jest.spyOn(mockHttpService.axiosRef, 'get');
 
         await expect(service.getRate()).resolves.toEqual(mockRate);
-        expect(mockHttpService.axiosRef.get).toHaveBeenCalled();
+        httpServiceExpectation();
       });
 
       it('should throws an error if api fails', async () => {
@@ -66,7 +78,7 @@ describe('RateService', () => {
         await expect(service.getRate()).rejects.toEqual(
           new RateBadRequestException(),
         );
-        expect(mockHttpService.axiosRef.get).toHaveBeenCalled();
+        httpServiceExpectation();
       });
     });
   });

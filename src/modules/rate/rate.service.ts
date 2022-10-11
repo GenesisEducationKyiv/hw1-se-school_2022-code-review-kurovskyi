@@ -28,8 +28,8 @@ export class RateService {
       const rate = rateResponse.data.data[0].quote.UAH.price;
 
       return rate;
-    } catch {
-      throw new RateBadRequestException();
+    } catch (error) {
+      throw new RateBadRequestException(error);
     }
   }
 }
